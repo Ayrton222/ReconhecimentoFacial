@@ -1,40 +1,46 @@
-# Reconhecimento facial
+# Reconhecimento Facial
 
-### Requisitos
- - Python versão 3 ou superior
- - Biblioteca cv2
- - Biblioteca ``mediapipe`` 
- - Biblioteca ``numpy``
+## Requisitos
 
-### Importação das  bibliotecas
-É recomendando usar um editor proprio da linguagem python ``(Pycharm ou jupiter)`` mas com outras IDES também é possivel rodar a aplicação, para instalar as bibliotecas va para o terminal do projeto e digite:
+- Python versão 3 ou superior
+- Biblioteca `cv2`
+- Biblioteca `mediapipe`
+- Biblioteca `numpy`
 
-### Importar cv2:
+## Importação das bibliotecas
 
+É recomendando usar um editor próprio da linguagem Python (como PyCharm ou Jupyter), mas com outras IDEs também é possível rodar a aplicação. Para instalar as bibliotecas, vá para o terminal do projeto e digite:
+
+### Importar cv2
+
+```sh
 pip install opencv-python
+```
 
 ### Importar mediapipe
 
+```sh
 pip install mediapipe
+```
 
 ### Importar numpy
 
+```sh
 pip install numpy
+```
 
-### Como utilizar 
+## Como utilizar
 
-A aplicação assim que inciada ela ira aparecer 3 opções no terminal para o usuario escolher (digitar) uma delas:
+A aplicação, assim que iniciada, irá apresentar 3 opções no terminal para o usuário escolher (digitando uma delas):
 
 - Opção 1: Treinar
 - Opção 2: Verificar
-- Opção 3: sair
+- Opção 3: Sair
 
 ### Treinar
 
-A aplicação ira abrir uma janela mostrando a webcam, e ira mostrar um frame reconhecendo o rosto da pessoa. Para tirar a foto é necessario apertar a tecla "ESC" do teclado. Após tirar a foto, a aplicação ira abrir um outro frame exibindo o rosto que foi detectado e como a foto ira ser armazenada,
-apos o usuario fechar ambos os frames, a aplicação ira salvar essa imagem no diretório imagens.
+A aplicação irá abrir uma janela mostrando a webcam, e irá exibir um frame reconhecendo o rosto da pessoa. Para tirar a foto é necessário apertar a tecla **ESC** do teclado. Após tirar a foto, a aplicação irá abrir outro frame exibindo o rosto que foi detectado e como a foto será armazenada. Após o usuário fechar ambos os frames, a aplicação irá salvar essa imagem no diretório `imagens`.
 
 ### Verificar
 
-A aplicação ira abrir uma janela moostrando a webcam e ira mostrar um frame reconhecendo o rosto da pessoa. Assim que a tecla "ESC" for pressionada, a aplicação ira tirar uma foto do rosto da pessoa e ira exibir um frame mostrando a imamgem do rosto que foi detectado,
-apos o usuario fechar ambos os frames, a aplicação ira salvar a imagem no diretorio imagens_comparacao, e ira exibir no terminal com qual das imagens contida no diretorio "imagens" a foto tirada mais se parece, e ira exibir a accurance da comparação realizada.
+A aplicação irá abrir uma janela mostrando a webcam e exibirá um frame reconhecendo o rosto da pessoa. Assim que a tecla **ESC** for pressionada, a aplicação irá tirar uma foto do rosto da pessoa e exibirá um frame mostrando a imagem do rosto que foi detectado. Após o usuário fechar ambos os frames, a aplicação irá salvar a imagem no diretório `imagens_comparacao`, e exibirá no terminal com qual das imagens contidas no diretório `imagens` a foto tirada mais se parece, além de exibir a acurácia da comparação realizada.
