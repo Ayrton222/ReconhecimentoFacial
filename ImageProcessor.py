@@ -6,7 +6,8 @@ import numpy as np
 class ImageProcessor:
     @staticmethod
     def calcular_similaridade(img1, img2):
-        diferenca = cv2.absdiff(img1, img2)
+        img2_redimensionada = cv2.resize(img2, (img1.shape[1], img1.shape[0]))
+        diferenca = cv2.absdiff(img1, img2_redimensionada)
         return np.mean(diferenca)
 
     @staticmethod
