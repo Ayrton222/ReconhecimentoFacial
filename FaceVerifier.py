@@ -2,26 +2,13 @@ import os
 import cv2
 import numpy as np
 
-class ImageProcessor:
-    @staticmethod
-    def calcular_similaridade(img1, img2):
-        img2_redimensionada = cv2.resize(img2, (img1.shape[1], img1.shape[0]))
-        diferenca = cv2.absdiff(img1, img2_redimensionada)
-        return np.mean(diferenca)
+from ImageProcessor import ImageProcessor
 
-    @staticmethod
-    def carregar_imagens(diretorio):
-        imagens = []
-        for arquivo in os.listdir(diretorio):
-            if arquivo.endswith(".png"):
-                caminho_imagem = os.path.join(diretorio, arquivo)
-                imagem = cv2.imread(caminho_imagem)
-                imagens.append((caminho_imagem, imagem))
-        return imagens
 
 class FaceVerifier:
-    def __init__(self, diretorio_comparacao):
+    def __init__(self, diretorio_comparacao, diretorio_imagens):
         self.diretorio_comparacao = diretorio_comparacao
+        self.diretorio_imagens = diretorio_imagens
         if not os.path.exists(diretorio_comparacao):
             os.makedirs(diretorio_comparacao)
 
@@ -29,17 +16,23 @@ class FaceVerifier:
         similaridade_minima = float('inf')
         imagem_mais_semelhante = None
 
-        h, w, _ = imagem_referencia.shape
-
+        # Verificar a imagem no banco de dados
         imagem_bytes = np.frombuffer(imagem_bd, dtype=np.uint8)
         imagem_decodificada = cv2.imdecode(imagem_bytes, cv2.IMREAD_COLOR)
-        print(f"fImagem banco: {imagem_decodificada}")
         similaridade_bd = ImageProcessor.calcular_similaridade(imagem_referencia, imagem_decodificada)
         if similaridade_bd < similaridade_minima:
             imagem_mais_semelhante = "Imagem do banco de dados"
             similaridade_minima = similaridade_bd
 
+        # Verificar imagens no diretório
+        imagens = ImageProcessor.carregar_imagens(self.diretorio_imagens)
+        for caminho_imagem, imagem in imagens:
+            similaridade = ImageProcessor.calcular_similaridade(imagem_referencia, imagem)
+            if similaridade < similaridade_minima:
+                imagem_mais_semelhante = caminho_imagem
+                similaridade_minima = similaridade
+
         acuracia = 1 - similaridade_minima
-        caminho_imagem_comparacao = os.path.join(self.diretorio_comparacao, f'imagem_comparacao.png')
+        caminho_imagem_comparacao = os.path.join(self.diretorio_comparacao, 'imagem_comparacao.png')
         cv2.imwrite(caminho_imagem_comparacao, imagem_referencia)
         return imagem_mais_semelhante, acuracia
